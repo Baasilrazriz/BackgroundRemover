@@ -7,11 +7,13 @@ import FormData from 'form-data';
 const ImageBackgroundRemover = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [image, setImage] = useState(null);
+  const [text, setText] = useState(null);
 
 
   const handleImageChange = async(event) => {
     const file = event.target.files[0];
   await  setImage(URL.createObjectURL(file))
+  setText("Removing Background")
     if (file) {
       const formData = new FormData();
       formData.append('size', 'auto');
@@ -54,7 +56,7 @@ const ImageBackgroundRemover = () => {
   id="imageInput"
 />
 <label htmlFor="imageInput" className="cursor-pointer">
-  <div className="border-dashed border-2 border-gray-300 h-96 w-96 rounded-xl flex justify-center items-center p-2">
+  <div className="border-dashed border-2 border-blue-400 h-96 w-96 rounded-xl flex justify-center items-center  bg-gray-200">
     {image ? (
      <div className='h-full w-full overflow-hidden rounded-xl'>
          <img src={image} alt="Selected" className="h-full w-full object-fill" />
@@ -72,15 +74,17 @@ const ImageBackgroundRemover = () => {
 
 <img className='h-full w-full object-fill' src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNC4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxnPg0KCQk8cG9seWdvbiBmaWxsPSIjNkU4M0I3IiBwb2ludHM9IjUwMiwyNTYgMzAyLDEwNiAzMDIsMTg2IDE0NiwxODYgMTQ2LDMyNiAzMDIsMzI2IDMwMiw0MDYgCQkiLz4NCgk8L2c+DQoJPGc+DQoJCTxyZWN0IHg9Ijc4IiB5PSIxODYiIGZpbGw9IiM2RTgzQjciIHdpZHRoPSI0MCIgaGVpZ2h0PSIxNDAiLz4NCgk8L2c+DQoJPGc+DQoJCTxyZWN0IHg9IjEwIiB5PSIxODYiIGZpbGw9IiM2RTgzQjciIHdpZHRoPSI0MCIgaGVpZ2h0PSIxNDAiLz4NCgk8L2c+DQo8L2c+DQo8L3N2Zz4NCg==" alt="" />
 </div>
-<div className='border-dashed border-2 border-gray-300 h-96 w-96 rounded-xl overflow p-2'>
+<div className='border-dashed border-2 border-yellow-500 h-96 w-96 rounded-xl flex justify-center items-center overflow p-2 bg-gray-200'>
 
-{selectedImage && (
+{selectedImage ? (
 
 <div className='h-full w-full overflow-hidden rounded-xl'>
 <img src={selectedImage} alt="Removed Background" className="h-full w-full object-fill" />
 </div>
 
-)}
+):(<>
+  <p className={` text-gray-500 ${text?"typingText":""}`}>{text?text:"Result image"}</p>
+</>)}
 </div>
 </div>
  </div>
